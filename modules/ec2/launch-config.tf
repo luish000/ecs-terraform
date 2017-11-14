@@ -1,15 +1,15 @@
-resource "aws_launch_configuration" "noxian_launch_config" {
-    name = "noxian_launch_config"
+resource "aws_launch_configuration" "launchConfiguration" {
+    name = "launchConfiguration"
     image_id = "${var.image}"
-    instance_type = "${var.noxian_instance_type}"
-    iam_instance_profile = "${var.noxian_instance_profile}"
-    security_groups = ["${var.hew}"]
+    instance_type = "${var.instanceType}"
+    iam_instance_profile = "${var.instanceProfile}"
+    security_groups = ["${var.sg}"]
     associate_public_ip_address = "true"
     key_name = "${var.key_pair}"
-    user_data = "${template_file.noxian_launch_config_user_data.rendered}"
+    user_data = "${template_file.launchConfigurationData.rendered}"
 }
 
-resource "template_file" "noxian_launch_config_user_data" {
+resource "template_file" "launchConfigurationData" {
     template = "${file("${path.module}/user-data.tpl")}"
 
     vars {

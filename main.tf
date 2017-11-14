@@ -11,15 +11,6 @@ module "vpc" {
   source = "./modules/vpc"
 }
 
-module "alb" {
-  source = "./modules/alb"
-
-  hew = "${module.vpc.hew}"
-  krexor = "${module.vpc.krexor}"
-  ironwater = "${module.vpc.ironwater}"
-  noxus = "${module.vpc.noxus}"
-}
-
 module "ecs" {
   source = "./modules/ecs"
 
@@ -29,10 +20,31 @@ module "ecs" {
 module "ec2" {
   source = "./modules/ec2"
 
-  hew = "${module.vpc.hew}"
-  krexor = "${module.vpc.krexor}"
-  ironwater = "${module.vpc.ironwater}"
-  noxian_instance_profile = "${module.iam.noxian_instance_profile}"
+  sg = "${module.vpc.ecsSecurityGroup}"
+  subnet1 = "${module.vpc.ecsPublicSubnet1}"
+  subnet2 = "${module.vpc.ecsPublicSubnet2}"
+  instanceProfile = "${module.iam.ecsInstanceProfile}"
   key_pair = "${var.key_pair}"
   cluster_name = "${var.cluster_name}"
+}
+
+module "alb" {
+  source = "./modules/alb"
+
+  sg = "${module.vpc.ecsSecurityGroup}"
+  subnet1 = "${module.vpc.ecsPublicSubnet1}"
+  subnet2 = "${module.vpc.ecsPublicSubnet2}"
+  ecsvpc = "${module.vpc.ecsvpc}"
+}
+
+module "api-task-definition" {
+  source = "./modules/ecs/definitions/api"
+}
+
+module "api-service" {
+  source = "./modules/ecs/services/api"
+  ecsServiceRole = "${module.iam.ecsServiceRoleArn}"
+  cluster = "${module.ecs.ecsCluster}"
+  apiTaskDef = "${module.api-task-definition.apiTaskDef}"
+  tg = "${module.alb.ecstg_arn}"
 }

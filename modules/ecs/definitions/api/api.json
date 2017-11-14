@@ -1,0 +1,15 @@
+[
+  {
+    "name": "api",
+    "image": "703640892562.dkr.ecr.us-east-1.amazonaws.com/myst:latest",
+    "memory": 128,
+    "cpu": 128,
+    "entryPoint": ["npm", "start"],
+    "portMappings": [
+      {
+        "containerPort": 8443,
+        "protocol": "tcp"
+      }
+    ]
+  }
+]

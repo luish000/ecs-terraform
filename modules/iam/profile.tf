@@ -1,9 +1,9 @@
-resource "aws_iam_instance_profile" "noxian_instance_profile" {
-    name = "instance_profile"
+resource "aws_iam_instance_profile" "ecsInstanceProfile" {
+    name = "ecsInstanceProfile"
     path = "/"
-    role = "${aws_iam_role.major.name}"
+    role = "${aws_iam_role.ecsInstanceRole.name}"
 }
 
-output "noxian_instance_profile" {
-  value = "${aws_iam_instance_profile.noxian_instance_profile.name}"
+output "ecsInstanceProfile" {
+  value = "${aws_iam_instance_profile.ecsInstanceProfile.name}"
 }

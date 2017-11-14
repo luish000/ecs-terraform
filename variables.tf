@@ -3,5 +3,5 @@ variable "key_pair" {
 }
 
 variable "cluster_name" {
-  default = "inmortal_bastion"
+  default = "myst"
 }

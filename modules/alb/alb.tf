@@ -1,14 +1,14 @@
-resource "aws_alb" "noxian_alb" {
+resource "aws_alb" "alb" {
   name = "alb"
-  security_groups = ["${var.hew}"]
-  subnets = ["${var.krexor}", "${var.ironwater}"]
+  security_groups = ["${var.sg}"]
+  subnets = ["${var.subnet1}", "${var.subnet2}"]
 }
 
-resource "aws_alb_target_group" "noxiantg" {
-  name = "noxiantg"
+resource "aws_alb_target_group" "ecstg" {
+  name = "tg"
   port = "80"
   protocol = "HTTP"
-  vpc_id = "${var.noxus}"
+  vpc_id = "${var.ecsvpc}"
 
   health_check {
     healthy_threshold = "5"
@@ -24,20 +24,20 @@ resource "aws_alb_target_group" "noxiantg" {
 }
 
 resource "aws_alb_listener" "alb-listener" {
-  load_balancer_arn = "${aws_alb.noxian_alb.arn}"
+  load_balancer_arn = "${aws_alb.alb.arn}"
   port = "80"
   protocol = "HTTP"
 
   default_action {
-    target_group_arn = "${aws_alb_target_group.noxiantg.arn}"
+    target_group_arn = "${aws_alb_target_group.ecstg.arn}"
     type = "forward"
   }
 }
 
-output "noxian_alb_name" {
-  value = "${aws_alb.noxian_alb.name}"
+output "alb_name" {
+  value = "${aws_alb.alb.name}"
 }
 
-output "noxiantg_arn" {
-  value = "${aws_alb_target_group.noxiantg.arn}"
+output "ecstg_arn" {
+  value = "${aws_alb_target_group.ecstg.arn}"
 }
