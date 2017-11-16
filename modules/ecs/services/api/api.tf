@@ -1,5 +1,5 @@
 resource "aws_ecs_service" "api" {
-  	name = "api-service"
+  	name = "${var.name}"
   	iam_role = "${var.ecsServiceRole}"
   	cluster = "${var.cluster}"
   	task_definition = "${var.apiTaskDef}"

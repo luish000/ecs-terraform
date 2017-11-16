@@ -35,3 +35,7 @@ variable "instanceType" {
 variable "autoscaling_group_name" {
   default = "ecsAutosacalingGroup"
 }
+
+variable "launchConfigurationName" {
+  default = "launchConfiguration"
+}
