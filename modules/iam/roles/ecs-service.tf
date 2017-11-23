@@ -1,9 +1,9 @@
-resource "aws_iam_role" "ecsServiceRole" {
-  name = "ecsServiceRole"
-  assume_role_policy = "${data.aws_iam_policy_document.ecsServiceRolePolicyDocument.json}"
+resource "aws_iam_role" "ecs_service_role" {
+  name = "ecs_service_role"
+  assume_role_policy = "${data.aws_iam_policy_document.ecs_service_role_policy_document.json}"
 }
 
-data "aws_iam_policy_document" "ecsServiceRolePolicyDocument" {
+data "aws_iam_policy_document" "ecs_service_role_policy_document" {
   statement {
     actions = ["sts:AssumeRole"]
     principals {
@@ -13,12 +13,12 @@ data "aws_iam_policy_document" "ecsServiceRolePolicyDocument" {
   }
 }
 
-resource "aws_iam_role_policy_attachment" "ecsServiceRolePolicyAttachment" {
-  role = "${aws_iam_role.ecsServiceRole.name}"
+resource "aws_iam_role_policy_attachment" "ecs_service_role_policy_attachment" {
+  role = "${aws_iam_role.ecs_service_role.name}"
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceRole"
 }
 
 
-output "ecsServiceRoleArn" {
-  value = "${aws_iam_role.ecsServiceRole.arn}"
+output "ecs_service_role_arn" {
+  value = "${aws_iam_role.ecs_service_role.arn}"
 }
