@@ -1,4 +1,4 @@
-variable "main_alb_name" { default = "ecs_alb" }
+variable "main_alb_name" { default = "alb" }
 
 resource "aws_alb" "main_alb" {
   name = "${var.main_alb_name}"

@@ -1,4 +1,4 @@
-variable "main_launch_configuration_name" { default = "main" }
+variable "main_launch_configuration_name" {}
 variable "main_image_id" {}
 variable "main_instance_type" {}
 
@@ -19,5 +19,5 @@ resource "template_file" "data" {
 }
 
 output "main_launch_configuration_name" {
-  value = "${aws.launch_configuration.main_launch_configuration.name}"
+  value = "${aws_launch_configuration.main_launch_configuration.name}"
 }

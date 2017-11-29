@@ -20,17 +20,18 @@ module "network" {
   ecs_sg_name = "${var.ecs_sg_name}"
 }
 
+module "ecs" {
+  source = "./modules/ecs"
+  vpc_id = "${module.network.vpc_id}"
+  main_alb_sg = "${module.network.ecs_sg}"
+  primary_subnet_id = "${module.network.primary_subnet_id}"
+  secondary_subnet_id = "${module.network.secondary_subnet_id}"
+  main_instance_type = "${var.main_instance_type}"
+  default_iam_profile = "${module.iam.ecs_instance_profile_name}"
+}
 
-#
-# module "vpc" {
-#   source = "./modules/vpc"
-# }
 
-# module "ecs" {
-#   source = "./modules/ecs"
-#
-#   cluster_name = "${var.cluster_name}"
-# }
+# iam vars
 #
 # module "ec2" {
 #   source = "./modules/ec2"

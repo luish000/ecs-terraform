@@ -14,25 +14,40 @@ variable "main_ag_desired_capacity" { default = "1" }
 
 # Launch configurations vars
 variable "main_launch_configuration_name" { default = "ecs_launch_configuration" }
-variable "main_image_id" {}
+variable "main_image_id" { default = "ami-6944c513" }
 variable "main_instance_type" {}
 
 # iam vars
 variable "default_iam_profile" {}
 
-# Ecs Module
-module "ecs" {
-  source = "./compute/ecs"
-  main_sg = "${var.main_alb_sg}"
+
+# Load balancers module
+module "load_balancers" {
+  source = "./albs"
+  main_alb_sg = "${var.main_alb_sg}"
   primary_subnet_id = "${var.primary_subnet_id}"
   secondary_subnet_id = "${var.secondary_subnet_id}"
   vpc_id = "${var.vpc_id}"
-  main_cluster_name = "${var.main_cluster_name}"
-  main_ag_max_instances = "${var.main_ag_max_instances}"
-  main_ag_min_instances = "${var.main_ag_min_instances}"
-  main_ag_desired_capacity = "${var.main_ag_desired_capacity}"
+}
+
+# Cluster module
+module "clusters" {
+  source = "./clusters"
+  cluster_name = "${var.main_cluster_name}"
+}
+
+# Ecs instances module
+module "instances" {
+  source = "./instances"
   main_launch_configuration_name = "${var.main_launch_configuration_name}"
   main_image_id = "${var.main_image_id}"
   main_instance_type = "${var.main_instance_type}"
+  main_ag_max_instances = "${var.main_ag_max_instances}"
+  main_ag_min_instances = "${var.main_ag_min_instances}"
+  main_ag_desired_capacity = "${var.main_ag_desired_capacity}"
+  primary_subnet_id = "${var.primary_subnet_id}"
+  secondary_subnet_id = "${var.secondary_subnet_id}"
   default_iam_profile = "${var.default_iam_profile}"
+  main_sg = "${var.main_alb_sg}"
+  cluster_name = "${var.main_cluster_name}"
 }

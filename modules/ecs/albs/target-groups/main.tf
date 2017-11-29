@@ -1,5 +1,5 @@
 variable "vpc_id" {}
-variable "main_tg_name" { default = "main_target_group" }
+variable "main_tg_name" { default = "main" }
 
 resource "aws_alb_target_group" "tg" {
   name = "${var.main_tg_name}"

@@ -46,3 +46,7 @@ variable "cluster_name" {
 variable "region" {
   default = ""
 }
+
+variable "main_instance_type" {
+  default = "t2.micro"
+}

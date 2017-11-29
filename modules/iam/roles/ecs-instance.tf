@@ -17,3 +17,7 @@ resource "aws_iam_role_policy_attachment" "ecs_instance_role_policy_attachment" 
     role = "${aws_iam_role.ecs_instance_role.name}"
     policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
 }
+
+output "ecs_instance_role_name" {
+  value = "${aws_iam_role.ecs_instance_role.name}"
+}
