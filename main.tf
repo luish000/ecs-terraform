@@ -3,6 +3,10 @@ provider "aws" {
   region = "us-east-1"
 }
 
+module "iam" {
+  source = "./modules/iam"
+}
+
 module "network" {
   source = "./modules/network"
   name = "${var.name}"
@@ -16,9 +20,7 @@ module "network" {
   ecs_sg_name = "${var.ecs_sg_name}"
 }
 
-# module "iam" {
-#   source = "./modules/iam"
-# }
+
 #
 # module "vpc" {
 #   source = "./modules/vpc"
