@@ -50,3 +50,16 @@ variable "region" {
 variable "main_instance_type" {
   default = "t2.micro"
 }
+
+# Auto scaling groups vars
+variable "main_ag_max_instances" {
+  default = "1"
+}
+
+variable "main_ag_min_instances" {
+  default = "1"
+}
+
+variable "main_ag_desired_capacity" {
+  default = "1"
+}
