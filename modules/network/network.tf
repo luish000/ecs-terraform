@@ -32,6 +32,7 @@ module "primary_public_subnet" {
   subnet_cidr = "${var.primary_subnet_cidr}"
   subnet_name = "${var.primary_subnet_name}"
   vpc_id = "${module.vpc.id}"
+  availability_zone = "us-east-1a"
 }
 
 module "secondary_public_subnet" {
@@ -39,13 +40,14 @@ module "secondary_public_subnet" {
   subnet_cidr = "${var.secondary_subnet_cidr}"
   subnet_name = "${var.secondary_subnet_name}"
   vpc_id = "${module.vpc.id}"
+  availability_zone = "us-east-1b"
 }
 
 module "sg" {
   source = "./sg"
   allow_cidr_block = "${var.allow_cidr_block}"
   allow_ipv6_cidr_block = "${var.allow_ipv6_cidr_block}"
-  ecs_sg_name = "${var.ecs_sg_name}"
+  name = "${var.ecs_sg_name}"
   vpc_id = "${module.vpc.id}"
 }
 
@@ -69,9 +71,9 @@ module "nacl" {
 
 output "vpc_id" { value = "${module.vpc.id}" }
 
-output "vpc_cidr" { value = "${module.vpc.vpc_cidr}" }
+output "vpc_cidr" { value = "${module.vpc.cidr}" }
 
-output "ecs_sg" { value = "${module.security_group.id}" }
+output "ecs_sg" { value = "${module.sg.id}" }
 
 output "primary_subnet_id" { value = "${module.primary_public_subnet.id}" }
 
