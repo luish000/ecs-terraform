@@ -51,3 +51,7 @@ module "instances" {
   main_sg = "${var.main_alb_sg}"
   cluster_name = "${var.main_cluster_name}"
 }
+
+module "task_definitions" {
+  source = "./task-definitions"
+}
