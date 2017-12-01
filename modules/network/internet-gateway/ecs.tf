@@ -9,4 +9,4 @@ resource "aws_internet_gateway" "ig" {
 
 }
 
-output "internet_gateway_id" { value = "${aws_internet_gateway.ig.id}" }
+output "id" { value = "${aws_internet_gateway.ig.id}" }

@@ -1,10 +1,10 @@
-variable "ecs_sg_name" {}
+variable "name" {}
 variable "allow_cidr_block" {}
 variable "allow_ipv6_cidr_block" {}
 variable "vpc_id" {}
 
 resource "aws_security_group" "sg" {
-    name = "${var.ecs_sg_name}"
+    name = "${var.name}"
     description = "Allow HTTP, HTTPS, and SSH"
     vpc_id = "${var.vpc_id}"
 
@@ -30,4 +30,4 @@ resource "aws_security_group" "sg" {
     }
 }
 
-output "sg_id" { value = "${aws_security_group.sg.id}" }
+output "id" { value = "${aws_security_group.sg.id}" }

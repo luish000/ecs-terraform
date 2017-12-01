@@ -20,18 +20,18 @@ module "network" {
   ecs_sg_name = "${var.ecs_sg_name}"
 }
 
-module "ecs" {
-  source = "./modules/ecs"
-  vpc_id = "${module.network.vpc_id}"
-  main_alb_sg = "${module.network.ecs_sg}"
-  primary_subnet_id = "${module.network.primary_subnet_id}"
-  secondary_subnet_id = "${module.network.secondary_subnet_id}"
-  main_instance_type = "${var.main_instance_type}"
-  default_iam_profile = "${module.iam.ecs_instance_profile_name}"
-  main_ag_max_instances = "${var.main_ag_max_instances}"
-  main_ag_min_instances = "${var.main_ag_min_instances}"
-  main_ag_desired_capacity = "${var.main_ag_desired_capacity}"
-}
+# module "ecs" {
+#   source = "./modules/ecs"
+#   vpc_id = "${module.network.vpc_id}"
+#   main_alb_sg = "${module.network.ecs_sg}"
+#   primary_subnet_id = "${module.network.primary_subnet_id}"
+#   secondary_subnet_id = "${module.network.secondary_subnet_id}"
+#   main_instance_type = "${var.main_instance_type}"
+#   default_iam_profile = "${module.iam.ecs_instance_profile_name}"
+#   main_ag_max_instances = "${var.main_ag_max_instances}"
+#   main_ag_min_instances = "${var.main_ag_min_instances}"
+#   main_ag_desired_capacity = "${var.main_ag_desired_capacity}"
+# }
 
 
 # iam vars
