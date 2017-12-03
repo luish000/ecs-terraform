@@ -5,7 +5,7 @@ variable "sg" {}
 resource "aws_alb" "alb" {
   name = "${var.name}"
   security_groups = ["${var.sg}"]
-  subnets = var.subnets
+  subnets = ["${var.subnets}"]
 }
 
 output "name" { value = "${aws_alb.alb.name}" }

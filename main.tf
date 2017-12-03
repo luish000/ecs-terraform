@@ -39,6 +39,16 @@ module "ec2" {
   desired_capacity = "${var.desired_capacity}"
 }
 
+module "balancer" {
+  source = "./modules/balancer"
+  sg = "${module.network.ecs_sg}"
+  subnets = [
+    "${module.network.primary_subnet_id}",
+    "${module.network.secondary_subnet_id}"
+  ]
+  vpc = "${module.network.vpc_id}"
+}
+
 
 
 # module "ecs" {

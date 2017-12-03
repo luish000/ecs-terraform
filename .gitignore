@@ -1,4 +1,9 @@
-aws.tf
-.terraform
-terraform.tfstate*
-.pem
+#  Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# .tfvars files
+*.tfvars

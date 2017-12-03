@@ -4,7 +4,7 @@ variable "port" { default = "80" }
 variable "protocol" { default = "HTTP" }
 
 resource "aws_alb_target_group" "tg" {
-  name = "${var.main_tg_name}"
+  name = "${var.name}"
   port = "${var.port}"
   protocol = "${var.protocol}"
   vpc_id = "${var.vpc_id}"
