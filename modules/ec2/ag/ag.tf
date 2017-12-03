@@ -7,7 +7,7 @@ variable "subnets" {
   type = "list"
 }
 
-module "aws_autoscaling_group" "ag" {
+resource "aws_autoscaling_group" "ag" {
   name = "${var.name}"
   max_size = "${var.max_instances}"
   min_size = "${var.min_instances}"

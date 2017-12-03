@@ -1,6 +1,6 @@
 # Configure the AWS Provider
 provider "aws" {
-  region = "us-east-1"
+  region = "${var.region}"
 }
 
 module "iam" {
@@ -19,11 +19,11 @@ module "network" {
   allow_ipv6_cidr_block = "${var.allow_ipv6_cidr_block}"
   ecs_sg_name = "${var.ecs_sg_name}"
 }
-
+#
 module "ec2" {
+  source = "./modules/ec2"
   autoscaling_group_name = "${var.autoscaling_group_name}"
   launch_configuration_name = "${var.launch_configuration_name}"
-  source = "./modules/ec2"
   sg = "${module.network.ecs_sg}"
   subnets = [
     "${module.network.primary_subnet_id}",
@@ -32,7 +32,7 @@ module "ec2" {
   instance_profile = "${module.iam.instance_profile_name}"
   key_pair = "${var.key_pair}"
   cluster_name = "${var.cluster_name}"
-  instance_type "${var.instance_type}"
+  instance_type = "${var.instance_type}"
   ami = "${var.ami}"
   max_instances = "${var.max_instances}"
   min_instances = "${var.min_instances}"

@@ -44,22 +44,34 @@ variable "cluster_name" {
 
 
 variable "region" {
-  default = ""
+  default = "us-east-1"
 }
 
-variable "main_instance_type" {
+variable "instance_type" {
   default = "t2.micro"
 }
 
 # Auto scaling groups vars
-variable "main_ag_max_instances" {
+variable "max_instances" {
   default = "1"
 }
 
-variable "main_ag_min_instances" {
+variable "min_instances" {
   default = "1"
 }
 
-variable "main_ag_desired_capacity" {
+variable "desired_capacity" {
   default = "1"
+}
+
+variable "ami" {
+  default = "ami-fad25980"
+}
+
+variable "launch_configuration_name" {
+  default = "ecs"
+}
+
+variable "autoscaling_group_name" {
+  default = "ecs"
 }

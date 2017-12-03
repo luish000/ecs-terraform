@@ -10,23 +10,23 @@ variable "launch_configuration_name" {}
 variable "ami" {}
 variable "instance_type" {}
 variable "key_pair" {}
-variable "iam_profile" {}
+variable "instance_profile" {}
 variable "cluster_name" {}
 variable "sg" {}
 
 module "lc" {
-  source = "./launch_config"
+  source = "./lc"
   name = "${var.launch_configuration_name}"
   ami = "${var.ami}"
   instance_type = "${var.instance_type}"
   key_pair = "${var.key_pair}"
-  iam_profile = "${var.iam_profile}"
+  instance_profile = "${var.instance_profile}"
   sg = "${var.sg}"
   user_data = "${template_file.data.rendered}"
 }
 
 module "ag" {
-  source = "./autoscaling_group"
+  source = "./ag"
   name = "${var.autoscaling_group_name}"
   max_instances = "${var.max_instances}"
   min_instances = "${var.min_instances}"
