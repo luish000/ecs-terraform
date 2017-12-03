@@ -28,10 +28,10 @@ module "ecs_instance_profile" {
   name = "${var.ecs_instance_profile_name}"
 }
 
-output "ecs_instance_role_name" {
+output "instance_role_name" {
   value = "${module.ecs_instance_role.name}"
 }
 
-output "ecs_instance_profile_name" {
+output "instance_profile_name" {
   value = "${module.ecs_instance_profile.name}"
 }

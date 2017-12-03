@@ -1,10 +1,12 @@
 variable "vpc_id" {}
-variable "main_tg_name" { default = "main" }
+variable "name" { default = "main" }
+variable "port" { default = "80" }
+variable "protocol" { default = "HTTP" }
 
 resource "aws_alb_target_group" "tg" {
   name = "${var.main_tg_name}"
-  port = "80"
-  protocol = "HTTP"
+  port = "${var.port}"
+  protocol = "${var.protocol}"
   vpc_id = "${var.vpc_id}"
 
   health_check {
@@ -20,4 +22,4 @@ resource "aws_alb_target_group" "tg" {
 
 }
 
-output "main_tg_arn" { value = "${aws_alb_target_group.tg.arn}" }
+output "arn" { value = "${aws_alb_target_group.tg.arn}" }
