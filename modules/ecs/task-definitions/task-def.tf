@@ -1,3 +1,0 @@
-module "api" {
-  source = "./api"
-}

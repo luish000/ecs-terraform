@@ -23,7 +23,7 @@ module "vpc" {
 }
 
 module "internet_gateway" {
-  source = "./internet-gateway"
+  source = "./internet_gateway"
   vpc_id = "${module.vpc.id}"
 }
 
@@ -51,8 +51,8 @@ module "sg" {
   vpc_id = "${module.vpc.id}"
 }
 
-module "route_table" {
-  source = "./route-table"
+module "table_route" {
+  source = "./table_route"
   allow_cidr_block = "${var.allow_cidr_block}"
   internet_gateway_id = "${module.internet_gateway.id}"
   primary_subnet_id = "${module.primary_public_subnet.id}"

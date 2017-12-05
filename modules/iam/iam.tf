@@ -1,4 +1,4 @@
-variable "ecs_instance_profile_name" { default = "ecs"}
+variable "ecs_instance_profile_name" { default = "ecs" }
 
 variable "container_ec2_service" {
   default = "ec2.amazonaws.com"
@@ -16,7 +16,7 @@ module "ecs_instance_role" {
 }
 
 module "ecs_service_role" {
-  source = "./ecs-role"
+  source = "./ecs_role"
   name = "ecs_service_role"
   service = "${var.container_ecs_service}"
   policy = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceRole"
