@@ -4,11 +4,11 @@ provider "aws" {
 }
 
 module "iam" {
-  source = "./modules/iam"
+  source = "../../../modules/aws/iam"
 }
 
 module "network" {
-  source = "./modules/network"
+  source = "../../../modules/aws/network"
   name = "${var.name}"
   vpc_cidr = "${var.vpc_cidr}"
   primary_subnet_cidr = "${var.primary_subnet_cidr}"
@@ -19,9 +19,9 @@ module "network" {
   allow_ipv6_cidr_block = "${var.allow_ipv6_cidr_block}"
   ecs_sg_name = "${var.ecs_sg_name}"
 }
-#
-module "ec2" {
-  source = "./modules/ec2"
+
+module "compute" {
+  source = "../../../modules/aws/compute"
   autoscaling_group_name = "${var.autoscaling_group_name}"
   launch_configuration_name = "${var.launch_configuration_name}"
   sg = "${module.network.ecs_sg}"
@@ -37,15 +37,6 @@ module "ec2" {
   max_instances = "${var.max_instances}"
   min_instances = "${var.min_instances}"
   desired_capacity = "${var.desired_capacity}"
-}
-
-module "balancer" {
-  source = "./modules/balancer"
-  sg = "${module.network.ecs_sg}"
-  subnets = [
-    "${module.network.primary_subnet_id}",
-    "${module.network.secondary_subnet_id}"
-  ]
   vpc = "${module.network.vpc_id}"
 }
 

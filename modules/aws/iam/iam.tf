@@ -9,7 +9,7 @@ variable "container_ecs_service" {
 }
 
 module "ecs_instance_role" {
-  source = "./ecs-role"
+  source = "./ecs_role"
   name = "ecs_instance_role"
   service = "${var.container_ec2_service}"
   policy = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
