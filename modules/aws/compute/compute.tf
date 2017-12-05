@@ -1,8 +1,7 @@
 variable "sg" {}
 variable "autoscaling_group_name" {}
 variable "launch_configuration_name" {}
-variable "sg" {}
-variable "subnets" {}
+variable "subnets" { type = "list" }
 variable "instance_profile" {}
 variable "key_pair" {}
 variable "cluster_name" {}
