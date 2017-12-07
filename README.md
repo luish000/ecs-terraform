@@ -1,8 +1,6 @@
 AWS ECS infrastructure
 ================================
 
----------
-
 
 Infrastructure
 -------------------
